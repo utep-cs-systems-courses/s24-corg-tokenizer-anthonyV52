@@ -33,3 +33,7 @@ uimain: tokenizer.o history.o uimain.o
 clean:
 
 	rm -f *.o sortargs
+# runs files
+
+run:uimain
+	./uimain

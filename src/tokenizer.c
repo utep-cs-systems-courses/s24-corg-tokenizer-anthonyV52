@@ -4,7 +4,6 @@
 #include "history.h"
 
 int space_char(char c){
-  printf("a\n");
   if(c == ' ' || c == '\t'){
 	 return 1;
   }
@@ -13,7 +12,6 @@ int space_char(char c){
 }
 
 int non_space_char(char c){
-  printf("b\n");
   if(c == ' ' || c == '\t'){
     return 0;
   }
@@ -22,7 +20,6 @@ int non_space_char(char c){
 }
 
 char *token_start(char *str){
-  printf("c \n");
   int i = 0;
   if(*str == '\0')
     return NULL;
@@ -51,7 +48,6 @@ char *token_terminator(char *token){
 }
 
 int count_tokens(char *str){
-  printf("count\n");
   int count = 0;
   int i;
   char *tmp = token_start(str);
@@ -60,7 +56,6 @@ int count_tokens(char *str){
     tmp = token_start(tmp);
     tmp = token_terminator(tmp);
     }
-  printf("%d", count);
   return count;
 
              }
@@ -83,7 +78,7 @@ char *copy_str(char *inStr, short len){
 char **tokenize(char *str){
   int count = count_tokens(str);
   char **tokens = malloc((count + 1) * sizeof(char *));
-  int i = 0;
+  int i;
   int token_count;
   char *p = str;
   for(i = 0;i < count;i++){
@@ -100,23 +95,26 @@ char **tokenize(char *str){
 }
   
 void  print_tokens(char **tokens){
-  int i = 0;
+  int i;
   while(tokens[i]){
+    if(space_char(tokens[i][0])||tokens[i][0]== '\0'){
+      i++;
+      continue;
+      }
     printf("Token[%d] = %s\n", i, tokens[i]);
-  
     i++;
   }
+  printf("Token[%d] = 0\n", i);
 
 }
 
 void free_tokens(char **tokens){
   int i = 0;
-  if (tokens == 0)
+  if (tokens == 0){
     return;
-  while(tokens[i])
+  }
+  while(tokens[i]!= NULL){
     free(tokens[i]);
-    i++;
-
-  if(*tokens[i] == '\0');
-    free(tokens);
+    i++;}
+  free(tokens);
 }

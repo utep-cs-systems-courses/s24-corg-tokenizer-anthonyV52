@@ -27,12 +27,10 @@ int main(){
       printf("\n");
 
       print_tokens(tokens);
-
-      add_history(history, *tokens);
-
+      add_history(history, input);
       free_tokens(tokens);
       
-    } else if (strncmp(input, "!h", 2) == 0) {
+    } else if (input[0] == '!' && input[1] == 'h') {
 
       print_history(history);
 
